@@ -112,7 +112,7 @@ $(document).ready(function(){
        for(x=0;x<radioValue.length;x++){
          totalScore += parseInt(radioValue[x]);
        }
-       $(".Answer_bb").html('<h1>' + totalScore + "</h1>"+"<p> Out of 10 </p>");
+       $(".Answer_bb").html('<h1>' + (totalScore * 10) + "%</h1>");
        $("#elem").show();
        animate({
         duration: 1000,
