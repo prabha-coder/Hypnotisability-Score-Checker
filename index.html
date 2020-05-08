@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+	<title>Hypnotisability Score Checker</title>
+	<script>
+		var quiz = [ {
+			"Question":"Have you ever become so involved in a television program, movie or play that you lose awareness of where you are ?"
+		},
+		{
+			"Question":"When someone has been talking to you, have you sometimes come back feeling lost ?"
+		},
+		{
+			"Question":"When reading (or) hearing about someboay else's experience, do you get deeply involved ?"
+		},
+		{
+			"Question":"Have you ever been able to recall an experience so vividly that you almost felt you were actually reliving it ?"
+		},
+		{
+			"Question":"Did you ever glance of the clock while engrassed in something to find that it's much later than you thought ?"
+		},
+		{
+			"Question":"Have you ever been physically hurt and only realized it later when you found a cut or a bruise ?"
+		},
+		{
+			"Question":"Have you ever been in automatic pilot ?"
+		},
+		{
+			"Question":"If you were to imagine yourself relishing your favourite dish, would your mouth begin to water ?"
+		},
+		{
+			"Question":"Do you believe it's possible for a person to be healed by the power of his/her mind ?"
+		},
+		{
+			"Question":"Any experience with hypnosis earlier ?"
+		}
+		];
+
+		function animate({duration, draw, timing}) {
+
+  let start = performance.now();
+
+  requestAnimationFrame(function animate(time) {
+    let timeFraction = (time - start) / duration;
+    if (timeFraction > 1) timeFraction = 1;
+
+    let progress = timing(timeFraction)
+
+    draw(progress);
+
+    if (timeFraction < 1) {
+      requestAnimationFrame(animate);
+    }
+
+  });
+}
+	</script>
+</head>
+<body>
+<div class="container">
+  <h2>Hypnotisability Score Checker</h2>
+  <div class="panel panel-default">
+    <div class="panel-heading Question_bb"></div>
+    <progress id="elem" style="display: none;"></progress>
+    <div class="panel-body Answer_bb">
+    	<div class="radio">
+           <label><input type="radio" name="answer_answer" checked="checked" value="1">Yes</label>
+        </div>
+        <div class="radio">
+           <label><input type="radio" name="answer_answer" value="0">No</label>
+        </div>
+    </div>
+    <button type="button" class="btn btn-primary quiz_bb" style="margin-left: 10px;margin-bottom: 10px;"></button>
+    <button type="button" class="btn btn-success Done_bb" style="margin-left: 10px;margin-bottom: 10px;display:none;">Done</button>
+  </div> 
+  <div class="alert alert-info" style="display: none;">
+    <strong>Thank You</strong> for the participation !
+  </div>
+  
+</div>
+<script>
+$(document).ready(function(){
+     var i=0;
+	function init(){
+			$(".Question_bb").html(quiz[0]['Question']);
+			$(".quiz_bb").html("Next Question");
+		}
+		init();
+		var radioValue = [];
+		$(".Done_bb").click(function(){
+          $(".panel").hide();
+          $(".alert-info").show();
+         });
+    $("button.quiz_bb").click(function(){
+      
+      radioValue[i] = $('.radio input:radio:checked').val();
+      i++;
+      if(i<10){
+      
+      $(".Question_bb").html(quiz[i]['Question']);
+      
+      }
+      else if(i==10){
+       totalScore = 0; 
+       $(".quiz_bb").hide();
+       $(".Question_bb").html("Total Score");
+       $(".Done_bb").show();
+       for(x=0;x<radioValue.length;x++){
+         totalScore += parseInt(radioValue[x]);
+       }
+       $(".Answer_bb").html('<h1>' + totalScore + "</h1>"+"<p> Out of 10 </p>");
+       $("#elem").show();
+       animate({
+        duration: 1000,
+        timing: function(timeFraction) {
+          return timeFraction;
+        },
+        draw: function(progress) {
+          elem.style.width = progress * (totalScore * 10) + '%';
+        }
+      });
+      }
+    });
+    
+      
+    
+});
+</script>
+</body>
+</html>
