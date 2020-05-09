@@ -68,13 +68,12 @@
     <progress id="elem" style="display: none;"></progress>
     <div class="panel-body Answer_bb">
     	<div class="radio">
-           <label><input type="radio" name="answer_answer" checked="checked" value="1">Yes</label>
+           <label><input type="radio" name="answer_answer" value="1">Yes</label>
         </div>
         <div class="radio">
            <label><input type="radio" name="answer_answer" value="0">No</label>
         </div>
     </div>
-    <button type="button" class="btn btn-primary quiz_bb" style="margin-left: 10px;margin-bottom: 10px;"></button>
     <button type="button" class="btn btn-success Done_bb" style="margin-left: 10px;margin-bottom: 10px;display:none;">Done</button>
   </div> 
   <div class="alert alert-info" style="display: none;">
@@ -95,7 +94,8 @@ $(document).ready(function(){
           $(".panel").hide();
           $(".alert-info").show();
          });
-    $("button.quiz_bb").click(function(){
+    //$("button.quiz_bb").click(function(){
+    $(".radio input[name='answer_answer']").click(function(){
       
       radioValue[i] = $('.radio input:radio:checked').val();
       i++;
