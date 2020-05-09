@@ -88,6 +88,7 @@ $(document).ready(function(){
 	function init(){
 			$(".Question_bb").html(quiz[0]['Question']);
 			$(".quiz_bb").html("Next Question");
+      $(".Q_number").html(i+1);
 		}
 		init();
 		var radioValue = [];
@@ -97,8 +98,11 @@ $(document).ready(function(){
          });
     //$("button.quiz_bb").click(function(){
     $(".radio input[name='answer_answer']").click(function(){
-      
+
       radioValue[i] = $('.radio input:radio:checked').val();
+
+      
+      $(".radio input[name='answer_answer']").prop('checked', false);
       i++;
       if(i<10){
       
